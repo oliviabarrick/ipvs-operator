@@ -1,0 +1,4 @@
+apiVersion: "codesink.net/v1alpha1"
+kind: "WeightedService"
+metadata:
+  name: "example"

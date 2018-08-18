@@ -1,0 +1,3 @@
+apiVersion: codesink.net/v1alpha1
+kind: WeightedService
+projectName: ipvs-operator
