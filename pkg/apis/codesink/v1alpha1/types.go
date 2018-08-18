@@ -1,6 +1,7 @@
 package v1alpha1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -22,8 +23,15 @@ type WeightedService struct {
 }
 
 type WeightedServiceSpec struct {
-	// Fill me
+	*corev1.ServiceSpec
+	Weights []ServiceWeight `json:"weights,omitempty"`
 }
+
+type ServiceWeight struct {
+	Weight   int               `json:"weight"`
+	Selector map[string]string `json:"selector"`
+}
+
 type WeightedServiceStatus struct {
 	// Fill me
 }

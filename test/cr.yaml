@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-canary
+  labels:
+    app: nginx
+    env: canary
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+      env: canary
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: canary
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+          name: www
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-prod
+  labels:
+    app: nginx
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: prod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+          name: www
+---
+apiVersion: codesink.net/v1alpha1
+kind: WeightedService
+metadata:
+  name: example
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: www
+  weights:
+  - weight: 3
+    selector:
+      env: prod
+  - weight: 5
+    selector:
+      env: canary

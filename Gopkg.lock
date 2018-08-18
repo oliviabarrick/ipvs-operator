@@ -26,6 +26,12 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/cnf/structhash"
+  packages = ["."]
+  revision = "62a607eb02243845670f25a61cbc2d394c1ede10"
+
+[[projects]]
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
   revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
@@ -124,6 +130,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/hkwi/nlgo"
+  packages = ["."]
+  revision = "dbae43f4fc47bf868bca3cc3c1ea2954c2059842"
+
+[[projects]]
+  branch = "master"
   name = "github.com/howeyc/gopass"
   packages = ["."]
   revision = "bf9dde6d0d2c004a008c27aaee91170c786f6db8"
@@ -170,6 +182,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/mqliang/libipvs"
+  packages = ["."]
+  revision = "7fc48254c184ef71e2f10f36bc8aa120873a1485"
+
+[[projects]]
+  branch = "master"
   name = "github.com/operator-framework/operator-sdk"
   packages = [
     "pkg/k8sclient",
@@ -179,6 +197,18 @@
     "version"
   ]
   revision = "9314564aede3cf664a49fe670d6f3efdc84dd7e7"
+
+[[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/prometheus/client_golang"
@@ -227,6 +257,12 @@
   packages = ["."]
   revision = "9a97c102cda95a86cec2345a6f09f55a939babf5"
   version = "v1.0.2"
+
+[[projects]]
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
 
 [[projects]]
   branch = "master"
@@ -538,6 +574,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "22a3131aff0c3b6f0a97bc22324996cfa5dabe1f626a90facb0daf29bbe0d52a"
+  inputs-digest = "f22c77feb742ba34ef12592430a8da4e874579102c67f4b977d8b88672beab2b"
   solver-name = "gps-cdcl"
   solver-version = 1
