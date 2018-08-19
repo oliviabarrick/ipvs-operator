@@ -8,9 +8,6 @@ The operator provides a new Kubernetes resource called a WeightedService.
 
 This operator is in very early alpha and should be used with care.
 
-Note that the service weights will not apply for anything that routes directly to
-endpoint IPs (e.g., ingress-nginx), but will work for the service IP.
-
 # Installation
 
 Follow the [IPVS guide](https://github.com/kubernetes/kubernetes/tree/master/pkg/proxy/ipvs) to configure
@@ -60,3 +57,26 @@ The WeightedService will create a Service matching the provided ServiceSpec and 
 pods that match the specified labels.
 
 See `test/example.yaml` for a full example.
+
+Note that the service weights will not apply for anything that routes directly to
+endpoint IPs (e.g., some ingress controllers by default), but will work for the
+service IP. For example, if you're using the nginx ingress controller
+[set the service-upstream annotation](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md#service-upstream):
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "canary-demo.local"
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  rules:
+  - host: canary-demo.local
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: example
+            servicePort: 80
+```

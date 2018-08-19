@@ -68,3 +68,19 @@ spec:
   - weight: 1
     selector:
       env: canary
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "canary-demo.local"
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  rules:
+  - host: canary-demo.local
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: example
+            servicePort: 80
