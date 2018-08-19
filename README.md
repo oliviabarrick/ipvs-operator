@@ -59,4 +59,4 @@ spec:
 The WeightedService will create a Service matching the provided ServiceSpec and assign weights to
 pods that match the specified labels.
 
-See `test/cr.yaml` for a full example.
+See `test/example.yaml` for a full example.

@@ -90,7 +90,7 @@ spec:
       hostNetwork: true
       containers:
         - name: ipvs-operator
-          image: justinbarrick/ipvs-operator:v0.0.1
+          image: justinbarrick/ipvs-operator:v0.0.2
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
