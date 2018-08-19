@@ -143,6 +143,12 @@ func (h *Handler) syncService(service *corev1.Service) error {
 		return err
 	}
 
+	scheduler := owner.Spec.Scheduler
+	if scheduler == "" {
+		scheduler = "wrr"
+	}
+	h.weighter.SetScheduler(*service, scheduler)
+
 	for _, weight := range owner.Spec.Weights {
 		pods, err := listPods(service.ObjectMeta.Namespace, sdk.WithListOptions(&metav1.ListOptions{
 			LabelSelector: metav1.FormatLabelSelector(&metav1.LabelSelector{

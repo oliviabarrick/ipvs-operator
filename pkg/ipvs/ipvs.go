@@ -83,6 +83,13 @@ func (i *IPVS) SetScheduler(service string, servicePort int, protocol string, sc
 		return err
 	}
 
+	if svc.SchedName == scheduler {
+		return nil
+	}
+
+	logrus.Infof("Setting scheduler: Service IP: %s:%d, Protocol: %s, Scheduler: %s",
+		service, servicePort, protocol, scheduler)
+
 	svc.SchedName = scheduler
 	return i.ipvs.UpdateService(svc)
 }

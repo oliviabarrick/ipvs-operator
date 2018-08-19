@@ -24,7 +24,8 @@ type WeightedService struct {
 
 type WeightedServiceSpec struct {
 	*corev1.ServiceSpec
-	Weights []ServiceWeight `json:"weights,omitempty"`
+	Scheduler string          `json:"scheduler"`
+	Weights   []ServiceWeight `json:"weights,omitempty"`
 }
 
 type ServiceWeight struct {

@@ -23,6 +23,18 @@ func NewIPVSServiceWeighter() (*ServiceWeighter, error) {
 	}, nil
 }
 
+func (s *ServiceWeighter) SetScheduler(service corev1.Service, scheduler string) error {
+	for _, port := range service.Spec.Ports {
+		err := s.Balancer.SetScheduler(service.Spec.ClusterIP, int(port.Port), string(port.Protocol), scheduler)
+		if err != nil {
+			logrus.Errorf("failed to set scheduler: %v", err)
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (s *ServiceWeighter) SetForPod(pod corev1.Pod, service corev1.Service, weight int) error {
 	if pod.Status.PodIP == "" {
 		logrus.Infof("Waiting for pod %s to have IP address assigned.", pod.ObjectMeta.Name)

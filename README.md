@@ -8,6 +8,9 @@ The operator provides a new Kubernetes resource called a WeightedService.
 
 This operator is in very early alpha and should be used with care.
 
+Note that the service weights will not apply for anything that routes directly to
+endpoint IPs (e.g., ingress-nginx), but will work for the service IP.
+
 # Installation
 
 Follow the [IPVS guide](https://github.com/kubernetes/kubernetes/tree/master/pkg/proxy/ipvs) to configure
@@ -27,7 +30,7 @@ You can use a WeightedService to apply IPVS load balancing weights to pods match
 
 A WeightService can enable canary deployments by setting different weights for your canary and production
 deployments. See [the IPVS weighted round-robin documentation](http://kb.linuxvirtualserver.org/wiki/Weighted_Round-Robin_Scheduling)
-for more information.
+for more information. If a scheduler is not set, it defaults to "wrr".
 
 For example, to send 10% of traffic to your canary deployment:
 
@@ -43,6 +46,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: www
+  scheduler: wlc
   weights:
   - weight: 10
     selector:
